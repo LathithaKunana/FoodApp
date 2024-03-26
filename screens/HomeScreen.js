@@ -3,6 +3,7 @@ import React from 'react'
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import {BellIcon, MagnifyingGlassIcon} from "react-native-heroicons/outline";
 import Catergo from '../components/Catergo';
+import { catergoryData } from '../constants';
 
 
 
@@ -37,9 +38,9 @@ export default function HomeScreen() {
               placeholder='Search any recipy'
               placeholderTextColor={"gray"}
               style={{fontSize: hp(1.7)}}
-              className="flex-1 text-base mb-1 pl-1 tracking-wider"
+              className="flex-1 text-base mb-1 pl-3 tracking-wider"
             />
-            <View className="bg-white rounded-full" >
+            <View className="bg-white rounded-full p-3" >
               <MagnifyingGlassIcon size={hp(2.5)} strokeWidth={3} color="gray" />
             </View>
           </View>
