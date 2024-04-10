@@ -7,7 +7,7 @@ import Animated, { FadeInDown } from 'react-native-reanimated';
 
 
 
-export default function Catergo({categories, activeCatergory, setActiveCatergory })  {
+export default function Catergo({categories, activeCatergory, handleChangeCategory })  {
     
     return (
         <Animated.View entering={FadeInDown.duration(500).springify()} >
@@ -26,7 +26,7 @@ export default function Catergo({categories, activeCatergory, setActiveCatergory
                         return (
                             <TouchableOpacity
                                 key={index}
-                                onPress={() => setActiveCatergory(cat.strCategory)}
+                                onPress={() => handleChangeCategory(cat.strCategory)}
                                 className ="flex items-center space-y-1"
                             >
                                 <View className={"rounded-full p-[6px]" + activeButtonClass}>

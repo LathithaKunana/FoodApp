@@ -5,17 +5,27 @@ import {BellIcon, MagnifyingGlassIcon} from "react-native-heroicons/outline";
 import Catergo from '../components/Catergo';
 import { catergoryData } from '../constants';
 import axios from 'axios';
+import Recipes from '../components/Recipes';
+
 
 
 
 
 export default function HomeScreen() {
   const [activeCatergory, setActiveCatergory] = useState('Beef');
-  const [catergories, setCatergories] = useState([])
+  const [catergories, setCatergories] = useState([]);
+  const [meals, setMeals] = useState([]);
 
   useEffect(() => {
     getCatergory();
+    getRecipes();
   },[])
+
+  const handleChangeCategory = category => {
+    getRecipes(category);
+    setActiveCatergory(category);
+    setMeals([]);
+  }
 
   const getCatergory = async () =>{
     try {
@@ -28,12 +38,23 @@ export default function HomeScreen() {
       console.log('error:', error.message)
     }
   }
+  const getRecipes = async ( category = "Beef") =>{
+    try {
+      const response = await axios.get(`https://themealdb.com/api/json/v1/1/filter.php?c=${category}`);
+      // console.log('got recipes:', response.data);
+       if (response && response.data){
+        setMeals(response.data.meals);
+       }
+    } catch (error) {
+      console.log('error:', error.message)
+    }
+  }
   return (
     <View className = "flex-1 bg-white">
       <StatusBar barStyle={"dark-content"}/>
         <ScrollView
           showsVerticalScrollIndicator={false}
-          contentContainerStyle={{paddingBottom: 50}}
+          contentContainerStyle={{paddingBottom: 20}}
           className ="space-y-6 pt-14"
           >
           {/* Avatar and bell icon */}
@@ -66,7 +87,12 @@ export default function HomeScreen() {
 
           {/* catergories */}
           <View>
-          { catergories.length> 0 && <Catergo categories={catergories} activeCatergory={activeCatergory} setActiveCatergory={setActiveCatergory}/>}
+           { catergories.length>0 &&<Catergo categories={catergories} activeCatergory={activeCatergory} handleChangeCategory={handleChangeCategory}/>}
+          </View>
+
+          {/* recipes */}
+          <View>
+            <Recipes meals={meals} categories={catergories}/>
           </View>
         </ScrollView>
       </View>
