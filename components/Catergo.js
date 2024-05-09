@@ -28,7 +28,7 @@ export default function Catergo({categories, activeCatergory, handleChangeCatego
                             <TouchableOpacity
                                 key={index}
                                 onPress={() => handleChangeCategory(cat.strCategory)}
-                                className ="flex items-center space-y-1"
+                                className ="flex items-center space-y-1 "
                             >
                                 <View className={"rounded-full p-[6px]" + activeButtonClass}>
                                     {/* <Image
