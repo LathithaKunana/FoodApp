@@ -8,7 +8,7 @@ import { CachedImage } from "../helpers/image";
 
 
 
-export default function Catergo({categories, activeCatergory, handleChangeCategory })  {
+default function Catergo({categories, activeCatergory, handleChangeCategory })  {
     
     return (
         <Animated.View entering={FadeInDown.duration(500).springify()} >
